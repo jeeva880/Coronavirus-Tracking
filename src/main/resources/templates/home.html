@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+	<meta charset="ISO-8859-1">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" >
+ 	<link th:href="@{/css/datatables.min.css}" rel="stylesheet">
+ 	<script th:href="@{/js/datatables.min.js}"></script>
+ 	
+ 	<head>
+    <title>Corona Virus Tracker application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+   <script>
+	   $(document).ready(function(){
+		  $('#myTable').DataTable();
+	   });
+   </script>
+  </head>
+
+  <body>
+	  <div  >
+  	<div class="p-3 mb-2 bg-info text-dark">
+    <h1>Corona Virus Tracker application</h1><br>
+    <p>This Application List the Current number of cases reported across the globe</p>
+    <div class="badge bg-danger text-light">
+		<a href="#" th:href="@{/ViewChart}"  role="button" class="btn btn-danger">
+    <h1 th:text="${totalDeathsReported}"></h1>
+		</a>
+    </div>
+    <p class="lead">Total cases reported </p>
+    </div>
+    <marquee behaviour="alternate"><div class="badge bg-success text-light"><h2>Wear Mask. Use Sanitizer.Keep Social Distance</h2></div></marquee>l
+    </div>
+   
+    <div class="container">
+  <table class="table table-striped" id="myTable" border="1">
+	  <thead>
+      <tr class="table-row bg-dark text-light">
+        <th>State</th>
+        <th>Country</th>
+        <th>Total Deaths Reported</th>
+         <th>Changes Since Last Day</th>
+      </tr>
+	  </thead>
+      <tr th:each="locationstate : ${LocationStates}">
+        <td th:text="${locationstate.state}"></td>
+        <td th:text="${locationstate.country}"></td>
+        <td th:text="${locationstate.latestTotalDeaths}">0</td>
+        <td th:text="${locationstate.differFromPrevay}">0</td>
+      </tr>
+    </table>
+    </div>
+  </body>
+
+</html>
